@@ -29,8 +29,10 @@ export class AuthService {
   }
 
   public async login(user) {
-    const token = await this.generateToken(user);
-    return { user, token };
+    const paylod = { email: user.email, sub: user.id };
+    return {
+      access_token: this.jwtService.sign(paylod),
+    };
   }
 
   public async create(user) {

@@ -43,5 +43,5 @@ export class User extends Model<User> {
     type: DataType.ENUM,
     values: ['admin', 'accessor', 'editor', 'parliamentary'],
   })
-  police: string;
+  roles: string;
 }
