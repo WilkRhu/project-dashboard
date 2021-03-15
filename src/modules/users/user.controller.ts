@@ -1,15 +1,12 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/role.guards';
+import { RouleAuthGuard } from '../auth/guards/role-auth.guard';
 import { UsersService } from './users.service';
-
 @Controller('user')
-@UseGuards(RolesGuard)
 export class UserController {
   constructor(private userService: UsersService) {}
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(RouleAuthGuard)
   async allUser() {
     return 'Hellow Word!';
   }
