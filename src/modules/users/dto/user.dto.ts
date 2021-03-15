@@ -1,4 +1,5 @@
 export class UserDto {
+  readonly uuid: string;
   readonly firstname: string;
   readonly lastname: string;
   readonly username: string;
