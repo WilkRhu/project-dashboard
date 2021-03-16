@@ -7,4 +7,5 @@ export class UserDto {
   readonly password: string;
   readonly gender: string;
   readonly roles: string;
+  readonly avatar: string;
 }

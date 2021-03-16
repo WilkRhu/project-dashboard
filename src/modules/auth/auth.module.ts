@@ -17,7 +17,7 @@ import { RoleStrategy } from './role.strategy';
       signOptions: { expiresIn: process.env.TOKEN_EXPIRATION },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, RoleStrategy],
+  providers: [AuthService, LocalStrategy, RoleStrategy, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

@@ -16,7 +16,18 @@ export class UsersService {
     return await this.userRepository.findOne<User>({ where: { email } });
   }
 
-  async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { id } });
+  async findOneById(uuid: string): Promise<User> {
+    return await this.userRepository.findOne<User>({ where: { uuid } });
+  }
+
+  async updateAvatarUser(avatar: ArrayBuffer, uuid: string): Promise<boolean> {
+    const updata = await this.userRepository.update(
+      { avatar },
+      { where: { uuid } },
+    );
+    if (updata[0] < 1) {
+      return false;
+    }
+    return true;
   }
 }
