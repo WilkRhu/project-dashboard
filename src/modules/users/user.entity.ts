@@ -51,4 +51,9 @@ export class User extends Model<User> {
     values: ['admin', 'accessor', 'editor', 'parliamentary'],
   })
   roles: string;
+
+  @Column({
+    type: DataType.BLOB('long'),
+  })
+  avatar: ArrayBuffer;
 }

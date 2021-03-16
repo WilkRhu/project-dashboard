@@ -16,7 +16,9 @@ export class RoleStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     // check if user in the token actually exist
-    const user = await this.userService.findOneById(payload.sub || payload.id);
+    const user = await this.userService.findOneById(
+      payload.sub || payload.uuid,
+    );
     if (!user) {
       throw new UnauthorizedException(
         'You are not authorized to perform the operation',
