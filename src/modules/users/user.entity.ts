@@ -1,7 +1,9 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Role } from '../auth/enuns/role.enum';
+import { UserDto } from './dto/user.dto';
 
 @Table
-export class User extends Model<User> {
+export class User extends Model<UserDto> {
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV1,
@@ -48,7 +50,7 @@ export class User extends Model<User> {
 
   @Column({
     type: DataType.ENUM,
-    values: ['admin', 'accessor', 'editor', 'parliamentary'],
+    values: [Role.ADM, Role.ACS, Role.EDT, Role.PRM],
   })
   roles: string;
 

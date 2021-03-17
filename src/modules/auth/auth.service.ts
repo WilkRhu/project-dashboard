@@ -36,20 +36,23 @@ export class AuthService {
   }
 
   public async create(user) {
-    // hash the password
-    const pass = await this.hashPassword(user.password);
+    try {
+      const pass = await this.hashPassword(user.password);
 
-    // create the user
-    const newUser = await this.userService.create({ ...user, password: pass });
+      const newUser = await this.userService.create({
+        ...user,
+        password: pass,
+      });
 
-    // tslint:disable-next-line: no-string-literal
-    const { password, ...result } = newUser['dataValues'];
-
-    // generate token
-    const token = await this.generateToken(result);
-
-    // return the user and the token
-    return { user: result, token };
+      const { password, ...result } = newUser['dataValues'];
+      const token = await this.generateToken(result);
+      return { user: result, token };
+    } catch (error) {
+      return {
+        status: 400,
+        error,
+      };
+    }
   }
 
   private async generateToken(user) {
