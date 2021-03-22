@@ -3,9 +3,7 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
 import { Gender } from '../../auth/enuns/gender.enum';
 import { Role } from '../../auth/enuns/role.enum';
 
-export class UserDto {
-  readonly uuid: string;
-
+export class CreateUserDto {
   @IsString()
   @Length(1, 100)
   readonly firstname: string;
@@ -32,7 +30,4 @@ export class UserDto {
 
   @IsEnum(Role)
   readonly roles: string;
-
-  @Exclude()
-  readonly avatar: ArrayBuffer;
 }

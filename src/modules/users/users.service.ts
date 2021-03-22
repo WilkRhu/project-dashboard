@@ -17,7 +17,10 @@ export class UsersService {
   }
 
   async findOneById(uuid: string): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { uuid } });
+    return await this.userRepository.findOne<User>({
+      where: { uuid },
+      attributes: { exclude: ['password', 'email'] },
+    });
   }
 
   async updateAvatarUser(avatar: ArrayBuffer, uuid: string): Promise<boolean> {
@@ -29,5 +32,17 @@ export class UsersService {
       return false;
     }
     return true;
+  }
+
+  async findAllUser(): Promise<User[]> {
+    return await this.userRepository.findAll({
+      attributes: {
+        exclude: ['password', 'email'],
+      },
+    });
+  }
+
+  async destroyUser(uuid: string): Promise<number> {
+    return await this.userRepository.destroy<User>({ where: { uuid } });
   }
 }
