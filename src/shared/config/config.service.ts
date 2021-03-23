@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { databaseConfig } from '../../core/database/database.config';
+import { config } from '../../../config/config.test';
 
 @Injectable()
 export class ConfigService {
   get sequelizeOrmConfig() {
-    return databaseConfig.test;
+    return config.database;
   }
 
   get jwtConfig() {
-    return { privateKey: databaseConfig.test.jwtPrivateKey };
+    return { secretOrKey: config.secretOrKey };
   }
 }

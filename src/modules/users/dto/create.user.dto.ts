@@ -1,5 +1,4 @@
-import { Exclude } from 'class-transformer';
-import { IsEmail, IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsEmail, IsEnum, IsString, Length } from 'class-validator';
 import { Gender } from '../../auth/enuns/gender.enum';
 import { Role } from '../../auth/enuns/role.enum';
 
@@ -21,8 +20,6 @@ export class CreateUserDto {
   readonly email: string;
 
   @IsString()
-  @IsNotEmpty()
-  @Exclude()
   readonly password: string;
 
   @IsEnum(Gender)

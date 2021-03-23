@@ -19,7 +19,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json && NODE_ENV=test"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.5.1",
@@ -30,7 +30,6 @@
     "@nestjs/microservices": "^7.6.14",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.13",
-    "@nestjs/typeorm": "^7.1.5",
     "@nextnm/nestjs-mailgun": "^1.0.4",
     "@types/faker": "^5.1.7",
     "@types/jsonwebtoken": "^8.5.0",
@@ -52,7 +51,9 @@
     "rxjs": "^6.6.6",
     "sequelize": "^6.5.0",
     "sequelize-typescript": "^2.1.0",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.6",

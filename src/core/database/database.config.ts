@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { Dialect } from 'sequelize/types';
 import { IDatabaseConfig } from './interfaces/dbConfig.interface';
 
 dotenv.config({
@@ -15,10 +16,9 @@ export const databaseConfig: IDatabaseConfig = {
     dialect: process.env.DB_DIALECT,
   },
   test: {
-    database: process.env.DB_NAME_TEST,
-    dialect: process.env.DB_DIALECT,
+    dialect: process.env.DB_DIALECT as Dialect,
     storage: process.env.DB_STORAGE,
-    jwtPrivateKey: process.env.JWTKEY,
+    secretOrKey: process.env.JWTKEY,
   },
   production: {
     username: process.env.DB_USER,

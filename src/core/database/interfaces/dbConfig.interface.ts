@@ -7,7 +7,7 @@ export interface IDatabaseConfigAttributes {
   dialect?: string;
   urlDatabase?: string;
   storage?: string;
-  jwtPrivateKey?: any;
+  secretOrKey?: string;
 }
 
 export interface IDatabaseConfig {
