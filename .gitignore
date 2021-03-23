@@ -37,3 +37,5 @@ lerna-debug.log*
 # env
 .env
 .env.sample
+
+./src/core/database/database.test.sqlite
