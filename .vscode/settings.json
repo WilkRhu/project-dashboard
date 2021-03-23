@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Project",
+            "database": "${workspaceFolder:sis-sequelize}/src/core/database/database.test.sqlite",
+            "group": "sistem"
+        }
+    ]
+}
