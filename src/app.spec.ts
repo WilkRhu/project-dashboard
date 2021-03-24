@@ -20,6 +20,7 @@ import { UsersModule } from './modules/users/users.module';
 describe('UsersService', () => {
   let app: INestApplication;
   let sequelize: Sequelize;
+  let userMaster;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -51,9 +52,22 @@ describe('UsersService', () => {
     app.setGlobalPrefix('/api/v1');
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
+
+    userMaster = await request(app.getHttpServer())
+      .post('/api/v1/auth/signup')
+      .send(usercreate);
   });
 
   describe('Users', () => {
+    it('should success return findAll', async () => {
+      const user = await request(app.getHttpServer())
+        .get('/api/v1/user')
+        .set('Authorization', `Bearer ${userMaster.body.token}`);
+      expect(user.status).toBe(200);
+    }, 5000);
+  });
+
+  describe('Signup', () => {
     it('shoul error on create user for email required', async () => {
       const user = await request(app.getHttpServer())
         .post('/api/v1/auth/signup')
@@ -94,6 +108,64 @@ describe('UsersService', () => {
         .post('/api/v1/auth/signup')
         .send(usercreate)
         .expect(HttpStatus.CREATED);
+    });
+  });
+
+  describe('Login', () => {
+    it('should login success on user return token', async () => {
+      return await request(app.getHttpServer())
+        .post('/api/v1/auth/login')
+        .send({
+          email: usercreate.email,
+          password: usercreate.password,
+        })
+        .expect(HttpStatus.CREATED);
+    });
+
+    it('should error login email', async () => {
+      const login = await request(app.getHttpServer())
+        .post('/api/v1/auth/login')
+        .send({
+          email: 'fulano@hotmail.com',
+          password: usercreate.password,
+        });
+      expect(login.body.statusCode).toBe(HttpStatus.UNAUTHORIZED);
+      expect(login.body.error).toBe('Unauthorized');
+      expect(login.body.message).toBe('Invalid user credentials');
+    });
+
+    it('should error login password invalid', async () => {
+      const login = await request(app.getHttpServer())
+        .post('/api/v1/auth/login')
+        .send({
+          email: usercreate.email,
+          password: 'sdfaadfdasf',
+        });
+      expect(login.body.statusCode).toBe(HttpStatus.UNAUTHORIZED);
+      expect(login.body.error).toBe('Unauthorized');
+      expect(login.body.message).toBe('Invalid user credentials');
+    });
+
+    it('should error login email empty', async () => {
+      const login = await request(app.getHttpServer())
+        .post('/api/v1/auth/login')
+        .send({
+          email: '',
+          password: usercreate.password,
+        });
+      expect(login.body.statusCode).toBe(HttpStatus.UNAUTHORIZED);
+      expect(login.body.message).toBe('Unauthorized');
+    });
+
+    it('should error login email empty', async () => {
+      const login = await request(app.getHttpServer())
+        .post('/api/v1/auth/login')
+        .send({
+          email: usercreate.email,
+          password: '',
+        });
+      expect(login.body.statusCode).toBe(HttpStatus.UNAUTHORIZED);
+      expect(login.body.message).toBe('Unauthorized');
     });
   });
 

@@ -38,5 +38,5 @@ lerna-debug.log*
 .env
 .env.sample
 
-./src/core/database/database.test.sqlite
+/src/core/database/database.test.sqlite
 package-lock.json
