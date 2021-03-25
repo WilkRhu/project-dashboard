@@ -30,6 +30,7 @@
     "@nestjs/microservices": "^7.6.14",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.13",
+    "@nestjs/swagger": "^4.8.0",
     "@nextnm/nestjs-mailgun": "^1.0.4",
     "@types/faker": "^5.1.7",
     "@types/jsonwebtoken": "^8.5.0",
@@ -52,6 +53,7 @@
     "sequelize": "^6.5.0",
     "sequelize-typescript": "^2.1.0",
     "sqlite3": "^5.0.2",
+    "swagger-ui-express": "^4.1.6",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.6"
   },

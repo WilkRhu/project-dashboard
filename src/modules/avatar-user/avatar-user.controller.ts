@@ -1,22 +1,39 @@
 import {
   Controller,
-  Post,
+  Patch,
+
   Request,
   Response,
   UploadedFile,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UsersService } from '../users/users.service';
 
 @Controller('avatar')
 export class AvatarUserController {
-  constructor(private usersService: UsersService) {}
-  @Post()
+  constructor(private usersService: UsersService) { }
+  @Patch()
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
   @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    type: 'multipart/form-data',
+    required: true,
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary'
+        }
+      }
+    }
+  })
   async uploadSingle(
     @UploadedFile() file: Express.Multer.File,
     @Request() req: any,
