@@ -14,6 +14,10 @@ module.exports = {
     node: true,
     jest: true,
   },
+  semi: true,
+  singleQuote: true,
+  tabWidth: 2,
+  useTabs: false,
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',

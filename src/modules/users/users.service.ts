@@ -6,7 +6,7 @@ import { User } from './user.entity';
 export class UsersService {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
-  ) {}
+  ) { }
 
   async create(user: User): Promise<User> {
     return await this.userRepository.create<User>(user);
@@ -37,7 +37,7 @@ export class UsersService {
   async findAllUser(): Promise<User[]> {
     return await this.userRepository.findAll({
       attributes: {
-        exclude: ['password', 'email'],
+        exclude: ['password', 'email', 'avatar'],
       },
     });
   }
