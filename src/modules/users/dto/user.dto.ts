@@ -46,12 +46,6 @@ export class UserDto {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({
-    description: 'Primeiro nome',
-    minLength: 6,
-    maxLength: 100,
-    example: '123456',
-  })
   readonly password: string;
 
   @IsEnum(Gender)

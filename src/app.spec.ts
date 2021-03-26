@@ -13,7 +13,7 @@ import {
   usercreate2,
   usercreate3,
   usercreate4,
-  usercreate5,
+  usercreate5
 } from './modules/mocks/repositoryMock/user';
 import { UsersModule } from './modules/users/users.module';
 
