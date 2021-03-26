@@ -46,7 +46,6 @@ export class UserDto {
 
   @IsString()
   @IsNotEmpty()
-  @Length(1, 100)
   @ApiProperty({
     description: 'Primeiro nome',
     minLength: 6,
