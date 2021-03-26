@@ -38,7 +38,28 @@ jobs:
               echo Heroku successfully installed.
             fi
 workflows:
- 
+  # This `lint-pack_validate_publish-dev` workflow will run on any commit.
+
+      # release dev version of orb, for testing & possible publishing.
+      # orb will be published as dev:alpha and dev:${CIRCLE_SHA1:0:7}.
+      # requires a CircleCI API token to be stored as CIRCLE_TOKEN (default)
+      # https://circleci.com/docs/2.0/managing-api-tokens
+      # store CIRCLE_TOKEN as a project env var or Contexts resource
+      # if using Contexts, add your context below
+      - orb-tools/publish-dev:
+          orb-name: circleci/heroku
+          context: orb-publishing
+          requires:
+            - orb-tools/pack
+
+      # trigger an integration workflow to test the
+      # dev:${CIRCLE_SHA1:0:7} version of your orb
+      - orb-tools/trigger-integration-tests-workflow:
+          name: trigger-integration-dev
+          context: orb-publishing
+          requires:
+            - orb-tools/publish-dev
+
   # This `integration-tests_prod-release` workflow will only run
   # when the run-integration-tests pipeline parameter is set to true.
   # It is meant to be triggered by the "trigger-integration-tests-workflow"
