@@ -1,7 +1,15 @@
 version: 2.1
-orbs:
-  heroku-orb: a14m/heroku-orb@1.0.2
-workflows:
-  heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
+
+ orbs:
+   heroku: circleci/heroku@x.y # Use the Heroku orb in your config
+
+ workflows:
+   heroku_deploy:
+     jobs:
+       - build
+       - heroku/deploy-via-git:
+           requires:
+             - build # only run deploy-via-git job if the build job has completed
+           filters:
+             branches:
+               only: master # only run deploy-via-git job on master branch
