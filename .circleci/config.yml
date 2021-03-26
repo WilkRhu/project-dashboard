@@ -64,22 +64,6 @@ workflows:
   # when the run-integration-tests pipeline parameter is set to true.
   # It is meant to be triggered by the "trigger-integration-tests-workflow"
   # job, and run tests on <your orb>@dev:${CIRCLE_SHA1:0:7}.
-  integration-tests_prod-release:
-    when: << pipeline.parameters.run-integration-tests >>
-    jobs:
-      # your integration test jobs go here: essentially, run all your orb's
-      # jobs and commands to ensure they behave as expected. or, run other
-      # integration tests of your choosing
-
-      # an example job
-      - integration-test-1
-
-      # publish a semver version of the orb. relies on
-      # the commit subject containing the text "[semver:patch|minor|major|skip]"
-      # as that will determine whether a patch, minor or major
-      # version will be published or if publishing should
-      # be skipped.
-      # e.g. [semver:patch] will cause a patch version to be published.
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: circleci/heroku
           context: orb-publishing
