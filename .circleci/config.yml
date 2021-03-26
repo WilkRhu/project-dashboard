@@ -4,4 +4,4 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - heroku/painel-sistem
+      - heroku/deploy-via-git
