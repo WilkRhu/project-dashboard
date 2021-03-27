@@ -2,10 +2,19 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@dev:alpha
   orb-tools: circleci/orb-tools@9.0
+jobs: 
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test  
 workflows:
   heroku_deploy:
     jobs:
       - heroku/deploy-via-git
-  steps:
-    - run: npm test
+      
       
