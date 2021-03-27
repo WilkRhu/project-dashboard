@@ -1,17 +1,24 @@
 version: 2.1
+
+aliases:
+  - &restore-cache
+    restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+  - &install-deps
+    run:
+        name: Install dependencies
+        command: npm ci
+  - &build-packages
+    run:
+        name: Build
+        command: npm run build
+  - &run-unit-tests
+    run:
+        name: Test
+        command: npm run test
 orbs:
   heroku: circleci/heroku@dev:alpha
-  orb-tools: circleci/orb-tools@9.0
-jobs: 
-  build-and-test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test  
+  orb-tools: circleci/orb-tools@9.0 
 workflows:
   heroku_deploy:
     jobs:
