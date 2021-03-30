@@ -11,7 +11,7 @@ export class NotificationController implements OnModuleInit {
     options: {
       client: {
         clientId: 'notification',
-        brokers: ['localhost:9092'],
+        brokers: ['https://painel-sistem.herokuapp.com:9092'],
       },
       consumer: {
         groupId: 'notification-consumer',
