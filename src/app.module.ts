@@ -5,6 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AvatarUserController } from './modules/avatar-user/avatar-user.controller';
 import { MailModule } from './modules/mail/mail.module';
 import { UsersModule } from './modules/users/users.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UsersModule } from './modules/users/users.module';
     DatabaseModule,
     UsersModule,
     AuthModule,
+    NotificationModule
   ],
   controllers: [AvatarUserController],
   providers: [],
