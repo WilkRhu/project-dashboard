@@ -38,6 +38,7 @@
     "dotenv": "^8.2.0",
     "faker": "^5.4.0",
     "jsonwebtoken": "^8.5.1",
+    "kafkajs": "^1.15.0",
     "mysql2": "^2.2.5",
     "nestjs-roles": "^0.4.1",
     "passport": "^0.4.1",
