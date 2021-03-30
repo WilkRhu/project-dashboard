@@ -1,2 +1,1 @@
-heroku container:push web
-web: docker-compose up -d && npm run start:prod 
+web: heroku docker-compose up -d && npm run start:prod 
